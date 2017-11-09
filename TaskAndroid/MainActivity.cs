@@ -26,6 +26,20 @@ namespace TaskAndroid
                 if (!String.IsNullOrEmpty(zipCodeEntry.Text))
                 {
                     Weather weather = await Core.GetWeather(zipCodeEntry.Text);
+                    if(weather == null)
+                    {
+                        Android.App.AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                        AlertDialog alert = dialog.Create();
+                        alert.SetTitle("Error");
+                        alert.SetMessage("Zip code unknow");
+                        alert.SetIcon(Resource.Drawable.Icon);
+                        alert.SetButton("OK", (c, ev) =>
+                        {
+                            // Ok button click task  
+                        });
+                        alert.Show();
+                        return;
+                    }
                     FindViewById<TextView>(Resource.Id.locationText).Text = weather.Title;
                     FindViewById<TextView>(Resource.Id.tempText).Text = weather.Temperature;
                     FindViewById<TextView>(Resource.Id.windText).Text = weather.Wind;

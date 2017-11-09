@@ -9,8 +9,9 @@ namespace WeatherApp
         {
             //Sign up for a free API key at http://openweathermap.org/appid  
             string key = "508fa55216d8dec95008f726d480863d";
+            //units=imperial (F), metric (C°)
             string queryString = "http://api.openweathermap.org/data/2.5/weather?zip="
-                + zipCode + ",us&appid=" + key + "&units=imperial";
+                + zipCode + ",us&appid=" + key + "&units=metric";
 
             dynamic results = await DataService.getDataFromService(queryString).ConfigureAwait(false);
 
@@ -18,7 +19,7 @@ namespace WeatherApp
             {
                 Weather weather = new Weather();
                 weather.Title = (string)results["name"];
-                weather.Temperature = (string)results["main"]["temp"] + " F";
+                weather.Temperature = (string)results["main"]["temp"] + " C°";
                 weather.Wind = (string)results["wind"]["speed"] + " mph";
                 weather.Humidity = (string)results["main"]["humidity"] + " %";
                 weather.Visibility = (string)results["weather"][0]["main"];

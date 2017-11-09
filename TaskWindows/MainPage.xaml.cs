@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using WeatherApp;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -33,6 +34,13 @@ namespace TaskWindows
             if (!String.IsNullOrEmpty(zipCodeEntry.Text))
             {
                 Weather weather = await Core.GetWeather(zipCodeEntry.Text);
+                if(weather == null)
+                {
+                    //show the error
+                    var dialog = new MessageDialog("Zip code unknow", "Error");
+                    await dialog.ShowAsync();
+                    return;
+                }
                 locationText.Text = weather.Title;
                 tempText.Text = weather.Temperature;
                 windText.Text = weather.Wind;

@@ -20,7 +20,7 @@
         android:layout_height="wrap_content" />
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="143.0dp"
+        android:layout_height="wrap_content"
         android:id="@+id/gridLayout1"
         android:minWidth="25px"
         android:minHeight="25px"
